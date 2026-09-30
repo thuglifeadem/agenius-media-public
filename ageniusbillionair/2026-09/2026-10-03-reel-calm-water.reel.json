@@ -1,0 +1,25 @@
+{
+  "output": "ageniusbillionair/2026-09/2026-10-03-reel-calm-water.mp4",
+  "duration": 8,
+  "base": {
+    "url": "https://cdn.pixabay.com/video/2024/09/29/233867_large.mp4",
+    "start": 0
+  },
+  "overlays": [
+    {
+      "png": "ageniusbillionair/2026-09/2026-10-03-reel-calm-water-chrome.png",
+      "from": 0,
+      "to": 8
+    },
+    {
+      "png": "ageniusbillionair/2026-09/2026-10-03-reel-calm-water-text-1.png",
+      "from": 0,
+      "to": 4.2
+    },
+    {
+      "png": "ageniusbillionair/2026-09/2026-10-03-reel-calm-water-text-2.png",
+      "from": 4.2,
+      "to": 8
+    }
+  ]
+}
