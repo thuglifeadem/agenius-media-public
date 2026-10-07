@@ -1,0 +1,25 @@
+{
+  "output": "ageniusbillionair/2026-10/2026-10-07-reel-rainy-day.mp4",
+  "duration": 9,
+  "base": {
+    "url": "https://cdn.pixabay.com/video/2022/12/04/141606-777930540_medium.mp4",
+    "start": 0
+  },
+  "overlays": [
+    {
+      "png": "ageniusbillionair/2026-10/2026-10-07-reel-rainy-day-chrome.png",
+      "from": 0,
+      "to": 9
+    },
+    {
+      "png": "ageniusbillionair/2026-10/2026-10-07-reel-rainy-day-text-1.png",
+      "from": 0,
+      "to": 4.5
+    },
+    {
+      "png": "ageniusbillionair/2026-10/2026-10-07-reel-rainy-day-text-2.png",
+      "from": 4.5,
+      "to": 9
+    }
+  ]
+}
