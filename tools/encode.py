@@ -164,7 +164,8 @@ def encode(spec_path):
         args += ["-i", str(local(base["webm"]))]
     else:
         src = fetch(base["url"], str(tmp / "source.mp4"))
-        args += ["-ss", str(float(base.get("start", 0))), "-i", src]
+        # Loop the clip so a long voice-over never runs past the footage.
+        args += ["-stream_loop", "-1", "-ss", str(float(base.get("start", 0))), "-i", src]
     overlays = spec.get("overlays", [])
     for o in overlays:
         args += ["-loop", "1", "-i", str(local(o["png"]))]
@@ -182,7 +183,10 @@ def encode(spec_path):
 
     grade = "" if "webm" in base else ",eq=saturation=0.92:contrast=1.04"
     # Hold the last frame if the voice-over runs past the rendered video.
-    hold = f",tpad=stop_mode=clone:stop_duration={duration - video_seconds + 1:.2f}" if duration > video_seconds else ""
+    hold = (
+        f",tpad=stop_mode=clone:stop_duration={duration - video_seconds + 1:.2f}"
+        if duration > video_seconds and "webm" in base else ""
+    )
     chain = [f"[0:v]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS}{grade}{hold},format=yuv420p[v0]"]
     last = "v0"
     for i, o in enumerate(overlays, start=1):
