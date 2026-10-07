@@ -231,7 +231,7 @@ def audio_chain(inputs, first, delay, duration):
             f"adelay={ms}|{ms},apad[vo]"
         )
     if "music" in idx:
-        level = "-11dB" if "voice" in idx else "+3dB"
+        level = "-6dB" if "voice" in idx else "+3dB"
         chain.append(
             f"[{idx['music']}:a]aresample=48000,aformat=channel_layouts=stereo,"
             f"afade=t=in:d=1.2,volume={level}[mus]"
