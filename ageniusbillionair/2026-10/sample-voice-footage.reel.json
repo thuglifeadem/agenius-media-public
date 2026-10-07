@@ -1,6 +1,6 @@
 {
   "output": "ageniusbillionair/2026-10/sample-voice-footage.mp4",
-  "duration": 17.5,
+  "duration": 16,
   "base": {
     "url": "https://cdn.pixabay.com/video/2023/09/12/180279-863744530_medium.mp4",
     "start": 0
@@ -9,7 +9,7 @@
     {
       "png": "ageniusbillionair/2026-10/sample-voice-footage-chrome.png",
       "from": 0,
-      "to": 17.5
+      "to": 16
     },
     {
       "png": "ageniusbillionair/2026-10/sample-voice-footage-text-1.png",
