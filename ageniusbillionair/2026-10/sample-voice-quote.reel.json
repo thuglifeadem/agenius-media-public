@@ -1,0 +1,19 @@
+{
+  "output": "ageniusbillionair/2026-10/sample-voice-quote.mp4",
+  "duration": 8,
+  "base": {
+    "webm": "ageniusbillionair/2026-10/sample-voice-quote.webm"
+  },
+  "overlays": [],
+  "audio": {
+    "voice": {
+      "text": "Rule number 1. The market pays the patient, not the loud.",
+      "voice": "en-US-AndrewMultilingualNeural",
+      "rate": "-4%",
+      "delay": 0.6
+    },
+    "music": {
+      "mood": "calm"
+    }
+  }
+}

@@ -19,8 +19,11 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Install ffmpeg
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Install ffmpeg and edge-tts
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pipx install edge-tts || pip install --user edge-tts
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Encode
         run: python3 tools/encode.py
       - name: Commit results
@@ -30,6 +33,6 @@ jobs:
           git add -A
           if ! git diff --cached --quiet; then
             git commit -m "Encode reels"
-            git pull --rebase origin main
-            git push origin HEAD:main
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
           fi

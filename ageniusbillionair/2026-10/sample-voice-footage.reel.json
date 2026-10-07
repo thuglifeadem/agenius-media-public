@@ -1,0 +1,36 @@
+{
+  "output": "ageniusbillionair/2026-10/sample-voice-footage.mp4",
+  "duration": 16,
+  "base": {
+    "url": "https://cdn.pixabay.com/video/2023/09/12/180279-863744530_medium.mp4",
+    "start": 0
+  },
+  "overlays": [
+    {
+      "png": "ageniusbillionair/2026-10/sample-voice-footage-chrome.png",
+      "from": 0,
+      "to": 16
+    },
+    {
+      "png": "ageniusbillionair/2026-10/sample-voice-footage-text-1.png",
+      "from": 0,
+      "to": 7
+    },
+    {
+      "png": "ageniusbillionair/2026-10/sample-voice-footage-text-2.png",
+      "from": 7,
+      "to": 16
+    }
+  ],
+  "audio": {
+    "voice": {
+      "text": "Real wealth isn't a number in your account. It's owning your time. Every hour you buy back is an hour you invest in what matters. So spend it like it's the scarcest asset you have. Because it is.",
+      "voice": "en-US-AndrewMultilingualNeural",
+      "rate": "-4%",
+      "delay": 0.6
+    },
+    "music": {
+      "mood": "calm"
+    }
+  }
+}
