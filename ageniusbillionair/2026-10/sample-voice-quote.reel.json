@@ -7,7 +7,7 @@
   "overlays": [],
   "audio": {
     "voice": {
-      "text": "Rule nº 1. The market pays the patient, not the loud.",
+      "text": "Rule number 1. The market pays the patient, not the loud.",
       "voice": "en-US-AndrewMultilingualNeural",
       "rate": "-4%",
       "delay": 0.6
