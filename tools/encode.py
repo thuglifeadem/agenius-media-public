@@ -7,7 +7,8 @@ A spec looks like:
   "duration": 8,
   "base": {"webm": "ageniusbillionair/2026-10/some-reel.webm"}      # rendered animation
        or {"url": "https://cdn.pixabay.com/video/...mp4", "start": 0}  # stock footage
-  "overlays": [{"png": "ageniusbillionair/2026-10/some-reel-1.png", "from": 0, "to": 3}]
+  "overlays": [{"png": "ageniusbillionair/2026-10/some-reel-1.png", "from": 0, "to": 3}],
+  "audio": "ageniusbillionair/2026-10/some-reel-voice.mp3"          # optional voiceover; omit for silence
 }
 Paths are relative to the repo root. Only Pixabay's CDN is allowed as a remote source.
 """
@@ -51,7 +52,15 @@ def encode(spec_path):
     overlays = spec.get("overlays", [])
     for o in overlays:
         args += ["-loop", "1", "-i", str(local(o["png"]))]
-    args += ["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=48000"]
+    audio_idx = 1 + len(overlays)
+    if spec.get("audio"):
+        # Voiceover (ElevenLabs MP3): normalized to the same format the silent
+        # track had, apad so a short clip never ends the reel early (-t trims).
+        args += ["-i", str(local(spec["audio"]))]
+        audio_map = "[aud]"
+    else:
+        args += ["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=48000"]
+        audio_map = f"{audio_idx}:a"
 
     grade = "" if "webm" in base else ",eq=saturation=0.92:contrast=1.04"
     chain = [f"[0:v]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS}{grade},format=yuv420p[v0]"]
@@ -64,10 +73,13 @@ def encode(spec_path):
         )
         chain.append(f"[{last}][o{i}]overlay=0:0:enable='between(t,{a},{b})'[v{i}]")
         last = f"v{i}"
-    audio_idx = 1 + len(overlays)
+    if audio_map.startswith("["):
+        chain.append(
+            f"[{audio_idx}:a]aformat=sample_rates=48000:channel_layouts=stereo,apad[aud]"
+        )
     args += [
         "-filter_complex", ";".join(chain),
-        "-map", f"[{last}]", "-map", f"{audio_idx}:a",
+        "-map", f"[{last}]", "-map", audio_map,
         "-t", str(duration),
         "-c:v", "libx264", "-profile:v", "high", "-level", "4.1", "-preset", "slow", "-crf", "18",
         "-pix_fmt", "yuv420p", "-r", str(FPS), "-g", str(FPS * 2),
